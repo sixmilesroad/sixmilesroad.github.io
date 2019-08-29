@@ -86,7 +86,7 @@
       
         <h3 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想"></a>算法思想</h3><ul>
 <li><input disabled type="checkbox"> 快速排序是冒泡排序的改进。和冒泡排序同属于<em>交换排序</em>。</li>
-<li><input disabled type="checkbox"> 用Partition方法来实现找出这么一个元素，该元素在数组中使得左面的元素都比它小，右面的元素都比它大，并返回该元素的位置。</li>
+<li><input disabled type="checkbox"> 用Partition方法来实现，序列中第一个元素，经过排序后，使该元素在数组中左面的元素都比它小，右面的元素都比它大，并返回该元素的位置。</li>
 <li><input disabled type="checkbox"> Partition具体实现，首先使key = a[low]，然后a[high]和key比较，若a[high]比key大，则high–，直到a[high]比key小，则a[low] = a[high],此时a[low]的值已经赋给key了，所以不用担心a[low]值的丢失。同理，a[low]和key比较，若a[low]&lt;key则low++，否则a[high] = a[low]。只要high不等于low就一直循环，直到low=high，再将a[low]=key。这时序列中就已经有一个元素排好序了。即这个key值，也就是原始序列中的第一个元素。其实Partition这个函数的作用就是每次将序列中第一个元素，在经过这次排序后，使其处于左边的元素都比他小，右边元素都比他大的位置上。</li>
 <li><input disabled type="checkbox"> sort函数：由于Partition每次只能将一个元素放到其应处于的位置上，且很好的将原序列分成了两部分，我们就可以对这两部分继续使用Partition函数，这就涉及到了递归，该递归的终止条件是low&lt;high。</li>
 </ul>
