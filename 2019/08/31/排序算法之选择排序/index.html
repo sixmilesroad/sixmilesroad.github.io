@@ -7,14 +7,18 @@
   
   <title>选择排序 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="article">
+  <meta name="description" content="算法思想 该算法较为简单。每次循环选出一个剩余序列中的最小值，将其与剩余序列的第一个元素交换。  for循环的执行顺序，for(i=0;i&amp;lt;a.length;i++){},先赋初始值i=0，再进行判断，然后执行循环体，再执行i++，再进行判断，若符合则执行循环体，不符合则推出循环。  平均，最好，最坏时间复杂度均是O(n^2)。并且是不稳定的算法。Eg：5(1),8,5(2),2,9 稳不稳">
+<meta name="keywords" content="-选择排序">
+<meta property="og:type" content="article">
 <meta property="og:title" content="选择排序">
 <meta property="og:url" content="http://yoursite.com/2019/08/31/排序算法之选择排序/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="算法思想 该算法较为简单。每次循环选出一个剩余序列中的最小值，将其与剩余序列的第一个元素交换。  for循环的执行顺序，for(i=0;i&amp;lt;a.length;i++){},先赋初始值i=0，再进行判断，然后执行循环体，再执行i++，再进行判断，若符合则执行循环体，不符合则推出循环。  平均，最好，最坏时间复杂度均是O(n^2)。并且是不稳定的算法。Eg：5(1),8,5(2),2,9 稳不稳">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-08-31T12:40:18.904Z">
+<meta property="og:updated_time" content="2019-08-31T13:47:08.531Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="选择排序">
+<meta name="twitter:description" content="算法思想 该算法较为简单。每次循环选出一个剩余序列中的最小值，将其与剩余序列的第一个元素交换。  for循环的执行顺序，for(i=0;i&amp;lt;a.length;i++){},先赋初始值i=0，再进行判断，然后执行循环体，再执行i++，再进行判断，若符合则执行循环体，不符合则推出循环。  平均，最好，最坏时间复杂度均是O(n^2)。并且是不稳定的算法。Eg：5(1),8,5(2),2,9 稳不稳">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -83,24 +87,42 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h3 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想"></a>算法思想</h3><ol>
+<li><p>该算法较为简单。每次循环选出一个剩余序列中的最小值，将其与剩余序列的第一个元素交换。</p>
+</li>
+<li><p>for循环的执行顺序，for(i=0;i&lt;a.length;i++){},先赋初始值i=0，再进行判断，然后执行循环体，再执行i++，再进行判断，若符合则执行循环体，不符合则推出循环。</p>
+</li>
+<li><p>平均，最好，最坏时间复杂度均是O(n^2)。并且是不稳定的算法。Eg：5(1),8,5(2),2,9</p>
+<p>稳不稳定看相同元素在排序过后是否相对顺序改变。</p>
+</li>
+<li><p>这里的时间复杂度因该是按执行次数，而不是交换次数。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> package2;</span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SelectSort</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Random random = <span class="keyword">new</span> Random();</span><br><span class="line">		<span class="keyword">int</span>[] a = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>];</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i&lt;a.length;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			a[i] = random.nextInt(<span class="number">100</span>);</span><br><span class="line">			System.out.print(a[i]);</span><br><span class="line">			System.out.print(<span class="string">" "</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println();</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i&lt;a.length;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">int</span> minIndex = i;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j = i;j&lt;a.length;j++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span>(a[minIndex]&gt;a[j])</span><br><span class="line">				&#123;</span><br><span class="line">					minIndex = j;</span><br><span class="line">				&#125;			</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">int</span> temp;</span><br><span class="line">			temp = a[minIndex];</span><br><span class="line">			a[minIndex] = a[i];</span><br><span class="line">			a[i] = temp;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i&lt;a.length;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			System.out.print(a[i]);</span><br><span class="line">			System.out.print(<span class="string">" "</span>);</span><br><span class="line">			</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<p>###### </p>
+
       
     </div>
     <footer class="article-footer">
       <a data-url="http://yoursite.com/2019/08/31/排序算法之选择排序/" data-id="ck01tblzq0005xgvp7gvgq253" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/选择排序/">-选择排序</a></li></ul>
+
     </footer>
   </div>
   
     
 <nav id="article-nav">
   
-    <a href="/2019/08/31/选择排序/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/08/31/时间复杂度之效率/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          选择排序
+          时间复杂度之效率
         
       </div>
     </a>
@@ -167,15 +189,15 @@
           </li>
         
           <li>
-            <a href="/2019/08/31/选择排序/">选择排序</a>
-          </li>
-        
-          <li>
             <a href="/2019/08/31/排序算法之选择排序/">选择排序</a>
           </li>
         
           <li>
             <a href="/2019/08/29/排序算法之快速排序/">排序算法之快速排序</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/29/排序算法之冒泡算法/">排序算法之冒泡算法</a>
           </li>
         
       </ul>
