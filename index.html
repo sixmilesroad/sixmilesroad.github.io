@@ -62,6 +62,75 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-排序算法之堆排序" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/09/02/排序算法之堆排序/" class="article-date">
+  <time datetime="2019-09-02T01:59:27.000Z" itemprop="datePublished">2019-09-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/02/排序算法之堆排序/">排序算法之堆排序</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="算法思想："><a href="#算法思想：" class="headerlink" title="算法思想："></a>算法思想：</h5><ul>
+<li><p>完全二叉树是除了最后一层，每层都铺满，且最后一层是从左到右铺的。堆也是完全二叉树。</p>
+<p><img src="C:%5CUsers%5CMSI%5CDesktop%5C%E4%BA%8C%E5%8F%89%E6%A0%91_%E7%9C%8B%E5%9B%BE%E7%8E%8B.jpg" alt="二叉树_看图王"></p>
+</li>
+</ul>
+<p>因为是完全二叉树，所以可以利用其下标特性使用数组进行操作。</p>
+<p>由于任意数组肯定不满足<strong>父节点大于其子节点的值</strong>这一特性。所以要将该数组进行<strong>初始化堆。</strong></p>
+<ul>
+<li>初始化堆（InitHeap()）需要从该树的<strong>最后一个非叶节点(array.length/2-1)</strong>进行。从该节点进行向下调整(AdjustHeap())，注意调整完后的子堆会由于调整后变得不是大顶堆，需要继续调整。如下图所示。</li>
+<li><img src="C:%5CUsers%5CMSI%5CDesktop%5C%E5%A0%86%E8%B0%83%E6%95%B4.jpg" alt="堆调整"></li>
+</ul>
+<p>​       <strong>root = maxchildIndex</strong>,然后再进行循环。（循环条件是只循环非叶节点，因为也叶节点不存在子节点，不会出现其子节点值大于自身值的情况。）</p>
+<ul>
+<li><p>初始化完堆后就已经使数组满足了父节点的值大于子节点的值这一条件了。此时array[0]中就是当前数组中的最大值，将array[0]和当前数组的最后一个元素a[array.length-1]交换，此时当前数组的最后一个元素就是当前数组的最大值。然后将剩余的a[0]-a[array.length-2]继续进行堆调整。调整后再将a[0]和a[array.length-2]进行交换，重复该过程，这样就得到了排序后的数组。</p>
+</li>
+<li><p>需要注意的是，最开始进行堆调整是为了使数组满足了父节点的值大于子节点的值这一条件，是从最后一个非叶节点向上进行调整的。</p>
+</li>
+<li><p>将a[0]和a[array.length-1]交换后，对a[0]-a[array.length-2]进行堆调整是从a[0]向下进行调整的。</p>
+</li>
+<li><p>判断最后一个非叶节点是只有左孩子还是左右孩子都有。</p>
+<p>if((root == length/2-1) &amp;&amp; (length % 2 == 0))</p>
+</li>
+<li><p>先在子节点之间比较，大的和父节点进行交换。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> Select;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Heap_sort</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		NewArray array = <span class="keyword">new</span> NewArray();<span class="comment">//这样就随机生成了一个有十个成员的数组</span></span><br><span class="line">		<span class="keyword">int</span>[] a = array.Array();</span><br><span class="line">		System.out.println(<span class="string">"初始状态"</span>);</span><br><span class="line">		Display(a);</span><br><span class="line">				</span><br><span class="line">		HeapSort(a);</span><br><span class="line">		System.out.println(<span class="string">"排序之后"</span>);</span><br><span class="line">		Display(a);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">HeapSort</span><span class="params">(<span class="keyword">int</span>[] array)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		InitHeap(array);</span><br><span class="line">		<span class="keyword">int</span> count = array.length;</span><br><span class="line">		<span class="keyword">while</span>(count&gt;=<span class="number">2</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">int</span> temp = array[count-<span class="number">1</span>];</span><br><span class="line">			array[count-<span class="number">1</span>] = array[<span class="number">0</span>];</span><br><span class="line">			array[<span class="number">0</span>] = temp;</span><br><span class="line">			</span><br><span class="line">			count--;</span><br><span class="line">			AdjustHeap(array,count,<span class="number">0</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">InitHeap</span><span class="params">(<span class="keyword">int</span>[] array)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = array.length/<span class="number">2</span>-<span class="number">1</span>;i&gt;=<span class="number">0</span>;i--)</span><br><span class="line">		&#123;</span><br><span class="line">			AdjustHeap(array,array.length,i);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">AdjustHeap</span><span class="params">(<span class="keyword">int</span>[] array,<span class="keyword">int</span> length,<span class="keyword">int</span> root)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">while</span>(root &lt;= length/<span class="number">2</span>-<span class="number">1</span>)<span class="comment">//length-1是数组最后一个元素的下标号</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">int</span> maxChildIndex;</span><br><span class="line">			<span class="keyword">if</span>((root == length/<span class="number">2</span>-<span class="number">1</span>) &amp;&amp; (length % <span class="number">2</span> == <span class="number">0</span>))<span class="comment">//需要判断最后一个非叶节点是否是两个孩子都有，如果有偶数个节点，只有左孩子。</span></span><br><span class="line">			&#123;</span><br><span class="line">				maxChildIndex = root*<span class="number">2</span>+<span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">int</span> leftchildIndex = root*<span class="number">2</span>+<span class="number">1</span>;</span><br><span class="line">				<span class="keyword">int</span> rightchildIndex = root*<span class="number">2</span>+<span class="number">2</span>;</span><br><span class="line">				maxChildIndex = array[leftchildIndex] &gt; array[rightchildIndex] ? leftchildIndex:rightchildIndex;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(array[maxChildIndex]&gt;array[root])</span><br><span class="line">			&#123;</span><br><span class="line">				Swap(array,maxChildIndex,root);</span><br><span class="line">				root = maxChildIndex;<span class="comment">//继续循环，保证调整后堆的子堆仍是是符合大顶堆，且这种由于交换完元素，子堆出现不符合大顶堆的现象只可能发生在非叶节点上，也就是root&lt;=length/2-1</span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">return</span>;<span class="comment">//该root下的左右孩子和root无需调整</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Swap</span><span class="params">(<span class="keyword">int</span>[] array,<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">        <span class="comment">/*交换时因该带上数组，不然值根本不改变*/</span></span><br><span class="line">		<span class="keyword">int</span> temp;</span><br><span class="line">		temp = array[a];</span><br><span class="line">		array[a] = array[b];</span><br><span class="line">		array[b] = temp;</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">    	<span class="comment">//private static void Swap(int a,int b)</span></span><br><span class="line">	<span class="comment">//&#123;</span></span><br><span class="line">        <span class="comment">//交换时因该带上数组，不然数组值根本不改变</span></span><br><span class="line">		<span class="comment">//int temp;</span></span><br><span class="line">		<span class="comment">//temp = a;</span></span><br><span class="line">		<span class="comment">//a = b;</span></span><br><span class="line">		<span class="comment">//b = temp;</span></span><br><span class="line">	<span class="comment">//&#125;</span></span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Display</span><span class="params">(<span class="keyword">int</span>[] array)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i&lt;array.length;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			System.out.print(array[i]);</span><br><span class="line">			System.out.print(<span class="string">" "</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> Select;</span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NewArray</span> </span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[]  Array()</span><br><span class="line">	&#123;</span><br><span class="line">		Random random = <span class="keyword">new</span> Random();</span><br><span class="line">		<span class="keyword">int</span>[] a = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>];</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i&lt;a.length;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			a[i] = random.nextInt(<span class="number">100</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> a;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/09/02/排序算法之堆排序/" data-id="ck01tblzl0001xgvpsn7tf7no" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/堆排序/">-堆排序</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-时间复杂度之效率" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/08/31/时间复杂度之效率/" class="article-date">
@@ -88,43 +157,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/31/时间复杂度之效率/" data-id="cjzzlp9sd0008owvpzwgsyb7s" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-排序算法之选择排序" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/08/31/排序算法之选择排序/" class="article-date">
-  <time datetime="2019-08-31T12:40:18.000Z" itemprop="datePublished">2019-08-31</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/31/排序算法之选择排序/">选择排序</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/31/排序算法之选择排序/" data-id="cjzzlp9sc0006owvpg1ulhjqz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/31/时间复杂度之效率/" data-id="ck01tblzt0009xgvpnud3otm0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -176,11 +209,47 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/31/选择排序/" data-id="cjzzlp9sd0007owvpzd7ccqp2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/31/选择排序/" data-id="ck01tblzp0004xgvp8034duu4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/选择排序/">-选择排序</a></li></ul>
 
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-排序算法之选择排序" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/08/31/排序算法之选择排序/" class="article-date">
+  <time datetime="2019-08-31T12:40:18.000Z" itemprop="datePublished">2019-08-31</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/31/排序算法之选择排序/">选择排序</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/08/31/排序算法之选择排序/" data-id="ck01tblzq0005xgvp7gvgq253" class="article-share-link">Share</a>
+      
+      
     </footer>
   </div>
   
@@ -225,7 +294,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/29/排序算法之快速排序/" data-id="cjzzlp9s60001owvpn51e1tf2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/29/排序算法之快速排序/" data-id="ck01tblzo0003xgvp5ebcn7hv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/快速排序/">-快速排序</a></li></ul>
@@ -265,7 +334,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/29/排序算法之冒泡算法/" data-id="cjzzlp9s20000owvptocmhxtt" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/29/排序算法之冒泡算法/" data-id="ck01tblzg0000xgvpqupfutst" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/冒泡算法/">-冒泡算法</a></li></ul>
@@ -316,7 +385,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/28/hello-world/" data-id="cjzzlp9se000aowvpei1imdz7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/28/hello-world/" data-id="ck01tblzs0008xgvplc7fel12" class="article-share-link">Share</a>
       
       
     </footer>
@@ -339,7 +408,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/冒泡算法/">-冒泡算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快速排序/">-快速排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/选择排序/">-选择排序</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/冒泡算法/">-冒泡算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/堆排序/">-堆排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快速排序/">-快速排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/选择排序/">-选择排序</a></li></ul>
     </div>
   </div>
 
@@ -349,7 +418,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/冒泡算法/" style="font-size: 10px;">-冒泡算法</a> <a href="/tags/快速排序/" style="font-size: 10px;">-快速排序</a> <a href="/tags/选择排序/" style="font-size: 10px;">-选择排序</a>
+      <a href="/tags/冒泡算法/" style="font-size: 10px;">-冒泡算法</a> <a href="/tags/堆排序/" style="font-size: 10px;">-堆排序</a> <a href="/tags/快速排序/" style="font-size: 10px;">-快速排序</a> <a href="/tags/选择排序/" style="font-size: 10px;">-选择排序</a>
     </div>
   </div>
 
@@ -358,7 +427,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li></ul>
     </div>
   </div>
 
@@ -371,11 +440,11 @@
       <ul>
         
           <li>
-            <a href="/2019/08/31/时间复杂度之效率/">时间复杂度之效率</a>
+            <a href="/2019/09/02/排序算法之堆排序/">排序算法之堆排序</a>
           </li>
         
           <li>
-            <a href="/2019/08/31/排序算法之选择排序/">选择排序</a>
+            <a href="/2019/08/31/时间复杂度之效率/">时间复杂度之效率</a>
           </li>
         
           <li>
@@ -383,11 +452,11 @@
           </li>
         
           <li>
-            <a href="/2019/08/29/排序算法之快速排序/">排序算法之快速排序</a>
+            <a href="/2019/08/31/排序算法之选择排序/">选择排序</a>
           </li>
         
           <li>
-            <a href="/2019/08/29/排序算法之冒泡算法/">排序算法之冒泡算法</a>
+            <a href="/2019/08/29/排序算法之快速排序/">排序算法之快速排序</a>
           </li>
         
       </ul>
