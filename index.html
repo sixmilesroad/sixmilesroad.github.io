@@ -62,6 +62,56 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-排序算法之希尔排序" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/09/03/排序算法之希尔排序/" class="article-date">
+  <time datetime="2019-09-03T11:07:21.000Z" itemprop="datePublished">2019-09-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/03/排序算法之希尔排序/">排序算法之希尔排序</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h6 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想"></a>算法思想</h6><ol>
+<li><p>希尔算法是直接插入算法的改进，按照一定的gap将待排序列分组，一般这个gap的选取是按序列长度的一半来选的，也就是首先gap= a.length/2,之后就是gap = gap/2，当gap==1时就相当于执行了一次直接插入排序。</p>
+</li>
+<li><p>将待排序列按照gap分组后，对每组分别实行直接插入算法，之后得到一个大体有序的序列。</p>
+</li>
+<li><p>然后按照新的gap对新的序列分组，再对每组进行直接插入算法。</p>
+</li>
+<li><p>直到gap==1。就完成了最后的排序。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> shell;</span><br><span class="line"><span class="keyword">import</span> Select.NewArray;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ShellSort</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		NewArray array = <span class="keyword">new</span> NewArray();<span class="comment">//这样就随机生成了一个有十个成员的数组</span></span><br><span class="line">		<span class="keyword">int</span>[] a = array.Array();</span><br><span class="line">		System.out.println(<span class="string">"初始状态"</span>);</span><br><span class="line">		Display(a);</span><br><span class="line">		<span class="keyword">int</span> N = a.length;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> gap = N/<span class="number">2</span>;gap&gt;=<span class="number">1</span>;gap = gap/<span class="number">2</span>)<span class="comment">//gap值的选取</span></span><br><span class="line">		&#123;<span class="comment">/*在每个gap值下，对该gap值所构成的分组进行直接插入排序*/</span></span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i = gap;i&lt;a.length;i++)<span class="comment">//初始i = gap是因为要使后面的元素有的比，就和直接插入排序时i=1是一个道理。</span></span><br><span class="line">			&#123;<span class="comment">/*但是并不是对一个分组进行完直接插入排序后再对下一个分组进行直接插入排序，实际情况是一个分组中的一个元素插入到其指定位置后，另一个分组就将其元素插到其指定位置了*/</span></span><br><span class="line">				Shell(a,gap,i);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(<span class="string">"排序之后"</span>);</span><br><span class="line">		Display(a);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Display</span><span class="params">(<span class="keyword">int</span>[] array)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i&lt;array.length;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			System.out.print(array[i]);</span><br><span class="line">			System.out.print(<span class="string">" "</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Shell</span><span class="params">(<span class="keyword">int</span>[] a,<span class="keyword">int</span> gap,<span class="keyword">int</span> i)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">int</span> inserted = a[i];</span><br><span class="line">		<span class="keyword">while</span>((i&gt;=gap) &amp;&amp; (inserted&lt;a[i-gap]))<span class="comment">//这就和直接插入排序一样了</span></span><br><span class="line">		&#123;</span><br><span class="line">			a[i] = a[i-gap];</span><br><span class="line">			i = i -gap;</span><br><span class="line">		&#125;</span><br><span class="line">		a[i] = inserted;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/09/03/排序算法之希尔排序/" data-id="ck03seb4r00014kvpkjwnyd9z" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/希尔排序/">-希尔排序</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-排序算法之直接插入排序" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/09/03/排序算法之直接插入排序/" class="article-date">
@@ -85,11 +135,15 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h5 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想"></a>算法思想</h5><ul>
-<li><p>将数组分为两部分，一部分是已经排序的（在数组前半部分），一部分是未排序的（数组的后半部分），从未排序的数组中取出第一个元素，在已排序数组中找到其位置，并插入。</p>
+<li><p>将数组分为两部分，一部分是已经排序的a[0]-a[i-1]（在数组前半部分），一部分是未排序的a[i]-a[n-1]（数组的后半部分），从未排序的数组中取出第一个元素a[i]，在已排序数组中找到其位置，并插入。</p>
 <p>此时需要将该位置及其后的元素后推一格。</p>
 </li>
 <li><p>平均和最坏时间复杂度是O(n^2)，最好时间复杂度是O(n).是稳定的算法。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> DirectInsertSort;</span><br><span class="line"><span class="keyword">import</span> Select.NewArray;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DirectInsert</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		NewArray array = <span class="keyword">new</span> NewArray();<span class="comment">//这样就随机生成了一个有十个成员的数组</span></span><br><span class="line">		<span class="keyword">int</span>[] a = array.Array();</span><br><span class="line">		System.out.println(<span class="string">"初始状态"</span>);</span><br><span class="line">		Display(a);</span><br><span class="line">		DirectInsertSort(a);</span><br><span class="line">		System.out.println(<span class="string">"排序后"</span>);</span><br><span class="line">		Display(a);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Display</span><span class="params">(<span class="keyword">int</span>[] array)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i&lt;array.length;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			System.out.print(array[i]);</span><br><span class="line">			System.out.print(<span class="string">" "</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">DirectInsertSort</span><span class="params">(<span class="keyword">int</span>[] a)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i =<span class="number">1</span>;i&lt;a.length;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">int</span> j ;</span><br><span class="line">			<span class="keyword">for</span>(j = <span class="number">0</span>;j&lt;i;j++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span>(a[i]&lt;a[j])</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line"><span class="comment">//			for(j = 0;j&lt;i;j++)//我错在for循环的j++和if中的j++重复了，正常是while中搭配j++</span></span><br><span class="line"><span class="comment">//			&#123;				  </span></span><br><span class="line"><span class="comment">//				if(a[i]&gt;a[j])//我这样就会使j+2而错过一个元素</span></span><br><span class="line"><span class="comment">//				&#123;</span></span><br><span class="line"><span class="comment">//					j++;</span></span><br><span class="line"><span class="comment">//				&#125;</span></span><br><span class="line"><span class="comment">//				else</span></span><br><span class="line"><span class="comment">//				&#123;</span></span><br><span class="line"><span class="comment">//					break;</span></span><br><span class="line"><span class="comment">//				&#125;</span></span><br><span class="line"><span class="comment">//			&#125;</span></span><br><span class="line">			<span class="keyword">int</span> temp = a[i];</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> k = i-<span class="number">1</span>;k&gt;=j;k--)<span class="comment">//a[j]-a[i-1]元素后退一格</span></span><br><span class="line">			&#123;</span><br><span class="line">				a[k+<span class="number">1</span>] = a[k];</span><br><span class="line">			&#125;</span><br><span class="line">			a[j] = temp;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面这种方法是从a[0]—&gt;a[i-1]比较的，用了一个for循环嵌套，还用了一个for循环将元素退一格。比较麻烦。下面的方法是从a[i-1]–&gt;a[0]开始比较，边比较边移动。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">DirectInsertSort</span><span class="params">(<span class="keyword">int</span>[] a)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i =<span class="number">1</span>;i&lt;a.length;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> temp = a[i];</span><br><span class="line">		<span class="keyword">while</span>((i&gt;=<span class="number">1</span>)&amp;&amp;(a[i-<span class="number">1</span>]&gt;temp))</span><br><span class="line">   <span class="comment">/*若写成while((a[i-1]&gt;temp)&amp;&amp;(i&gt;=1))则会出现a[i-1]下标越界的情况，因为while中的条件是从左到右，一旦一个不满足，就不检查之后的了*/</span></span><br><span class="line">		&#123;</span><br><span class="line">			a[i] = a[i-<span class="number">1</span>];</span><br><span class="line">			i--;</span><br><span class="line">		&#125;</span><br><span class="line">		a[i] = temp;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
 </li>
 </ul>
@@ -97,7 +151,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/03/排序算法之直接插入排序/" data-id="ck039eu5j0000l0vppq72xiui" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/03/排序算法之直接插入排序/" data-id="ck03seb4w00054kvpyuipct4l" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/直接插入排序/">-直接插入排序</a></li></ul>
@@ -166,7 +220,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/02/类成员的访问控制权限/" data-id="ck039eu5v0009l0vp22ox2e9f" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/02/类成员的访问控制权限/" data-id="ck03seb58000k4kvp7qiqylqr" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/访问控制符的作用/">-访问控制符的作用</a></li></ul>
@@ -235,7 +289,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/02/排序算法之堆排序/" data-id="ck039eu5s0004l0vpangwae4x" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/02/排序算法之堆排序/" data-id="ck03seb4u00034kvpne5ko65m" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/堆排序/">-堆排序</a></li></ul>
@@ -273,7 +327,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/31/时间复杂度之效率/" data-id="ck039eu5t0005l0vpx8j2ekt1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/31/时间复杂度之效率/" data-id="ck03seb57000j4kvp74of7fov" class="article-share-link">Share</a>
       
       
     </footer>
@@ -325,7 +379,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/31/排序算法之选择排序/" data-id="ck039eu61000hl0vprynwb4tf" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/31/排序算法之选择排序/" data-id="ck03seb4z00094kvpb3ucqk24" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/选择排序/">-选择排序</a></li></ul>
@@ -374,7 +428,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/29/排序算法之快速排序/" data-id="ck039eu5u0008l0vpsk6leguq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/29/排序算法之快速排序/" data-id="ck03seb4y00084kvprhaqczf8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/快速排序/">-快速排序</a></li></ul>
@@ -414,7 +468,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/29/排序算法之冒泡算法/" data-id="ck039eu5o0001l0vpquop80vv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/29/排序算法之冒泡算法/" data-id="ck03seb4n00004kvpjqsrplhe" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/冒泡算法/">-冒泡算法</a></li></ul>
@@ -465,7 +519,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/28/hello-world/" data-id="ck039eu5q0003l0vp5jeeeh3t" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/28/hello-world/" data-id="ck03seb4v00044kvp9ou3w27d" class="article-share-link">Share</a>
       
       
     </footer>
@@ -488,7 +542,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/冒泡算法/">-冒泡算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/堆排序/">-堆排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快速排序/">-快速排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/直接插入排序/">-直接插入排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/访问控制符的作用/">-访问控制符的作用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/选择排序/">-选择排序</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/冒泡算法/">-冒泡算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/堆排序/">-堆排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/希尔排序/">-希尔排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快速排序/">-快速排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/直接插入排序/">-直接插入排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/访问控制符的作用/">-访问控制符的作用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/选择排序/">-选择排序</a></li></ul>
     </div>
   </div>
 
@@ -498,7 +552,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/冒泡算法/" style="font-size: 10px;">-冒泡算法</a> <a href="/tags/堆排序/" style="font-size: 10px;">-堆排序</a> <a href="/tags/快速排序/" style="font-size: 10px;">-快速排序</a> <a href="/tags/直接插入排序/" style="font-size: 10px;">-直接插入排序</a> <a href="/tags/访问控制符的作用/" style="font-size: 10px;">-访问控制符的作用</a> <a href="/tags/选择排序/" style="font-size: 10px;">-选择排序</a>
+      <a href="/tags/冒泡算法/" style="font-size: 10px;">-冒泡算法</a> <a href="/tags/堆排序/" style="font-size: 10px;">-堆排序</a> <a href="/tags/希尔排序/" style="font-size: 10px;">-希尔排序</a> <a href="/tags/快速排序/" style="font-size: 10px;">-快速排序</a> <a href="/tags/直接插入排序/" style="font-size: 10px;">-直接插入排序</a> <a href="/tags/访问控制符的作用/" style="font-size: 10px;">-访问控制符的作用</a> <a href="/tags/选择排序/" style="font-size: 10px;">-选择排序</a>
     </div>
   </div>
 
@@ -520,6 +574,10 @@
       <ul>
         
           <li>
+            <a href="/2019/09/03/排序算法之希尔排序/">排序算法之希尔排序</a>
+          </li>
+        
+          <li>
             <a href="/2019/09/03/排序算法之直接插入排序/">排序算法之直接插入排序</a>
           </li>
         
@@ -533,10 +591,6 @@
         
           <li>
             <a href="/2019/08/31/时间复杂度之效率/">时间复杂度之效率</a>
-          </li>
-        
-          <li>
-            <a href="/2019/08/31/排序算法之选择排序/">选择排序</a>
           </li>
         
       </ul>
