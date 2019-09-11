@@ -15,13 +15,13 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="default修饰符如果一个成员或者方法没有修饰符，则默认为default修饰符。 没有以下这种 1default int a;//不用加default，加了就报错   默认的访问控制成员可以被其所在包中的其他类访问。  如果一个类和其父类不在同一个包，则该类不能访问父类中的默认访问控制成员。 图和代码如下    1234567891011package father;import son.cat">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://yourname.github.io/2019/09/02/类成员的访问控制权限/C:%5CUsers%5CMSI%5CDesktop%5C%E7%88%B6%E5%AD%90.png">
-<meta property="og:image" content="http://yourname.github.io/2019/09/02/类成员的访问控制权限/C:%5CUsers%5CMSI%5CDesktop%5Cpublic.png">
+<meta property="og:image" content="http://sixmilesroad.github.io/2019/09/02/类成员的访问控制权限/C:%5CUsers%5CMSI%5CDesktop%5C%E7%88%B6%E5%AD%90.png">
+<meta property="og:image" content="http://sixmilesroad.github.io/2019/09/02/类成员的访问控制权限/C:%5CUsers%5CMSI%5CDesktop%5Cpublic.png">
 <meta property="og:updated_time" content="2019-09-02T09:07:27.489Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="类成员的访问控制权限">
 <meta name="twitter:description" content="default修饰符如果一个成员或者方法没有修饰符，则默认为default修饰符。 没有以下这种 1default int a;//不用加default，加了就报错   默认的访问控制成员可以被其所在包中的其他类访问。  如果一个类和其父类不在同一个包，则该类不能访问父类中的默认访问控制成员。 图和代码如下    1234567891011package father;import son.cat">
-<meta name="twitter:image" content="http://yourname.github.io/2019/09/02/类成员的访问控制权限/C:%5CUsers%5CMSI%5CDesktop%5C%E7%88%B6%E5%AD%90.png">
+<meta name="twitter:image" content="http://sixmilesroad.github.io/2019/09/02/类成员的访问控制权限/C:%5CUsers%5CMSI%5CDesktop%5C%E7%88%B6%E5%AD%90.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -99,7 +99,7 @@
 </li>
 <li><p>如果一个类和其父类不在同一个包，则该类不能访问父类中的默认访问控制成员。</p>
 <p>图和代码如下</p>
-<p><img src="//yourname.github.io/2019/09/02/类成员的访问控制权限/C:%5CUsers%5CMSI%5CDesktop%5C%E7%88%B6%E5%AD%90.png" alt="父子"></p>
+<p><img src="//sixmilesroad.github.io/2019/09/02/类成员的访问控制权限/C:%5CUsers%5CMSI%5CDesktop%5C%E7%88%B6%E5%AD%90.png" alt="父子"></p>
 </li>
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> father;</span><br><span class="line"><span class="keyword">import</span> son.cat;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Action</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		cat mimi = <span class="keyword">new</span> cat();</span><br><span class="line">		mimi.name = <span class="string">"小猫"</span>;</span><br><span class="line">		mimi.age = <span class="number">19</span>;<span class="comment">//会报错</span></span><br><span class="line">        <span class="comment">/*因为父类和子类不在一个包中，所以子类不能用父类的default成员*/</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -114,7 +114,7 @@
 <li><p>也可以被不同包中的子类所访问，这在用default中是不能的。</p>
 </li>
 <li><p>但是如果是不同包中没有父子关系的类就不能访问了。如下所示。</p>
-<p><img src="//yourname.github.io/2019/09/02/类成员的访问控制权限/C:%5CUsers%5CMSI%5CDesktop%5Cpublic.png" alt="public"></p>
+<p><img src="//sixmilesroad.github.io/2019/09/02/类成员的访问控制权限/C:%5CUsers%5CMSI%5CDesktop%5Cpublic.png" alt="public"></p>
 </li>
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> son;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">car</span> </span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">int</span> money;</span><br><span class="line">	<span class="keyword">protected</span> <span class="keyword">int</span> Carage;</span><br><span class="line">	<span class="keyword">int</span> color;<span class="comment">//黑1白0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -125,7 +125,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://sixmilesroad.github.io/2019/09/02/类成员的访问控制权限/" data-id="ck0ejzeef000hjcvp1o0vtz6a" class="article-share-link">Share</a>
+      <a data-url="http://sixmilesroad.github.io/2019/09/02/类成员的访问控制权限/" data-id="ck0ekhly3000jfwvpuj95j938" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/访问控制符的作用/">-访问控制符的作用</a></li></ul>
@@ -167,7 +167,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/dadadad/">-dadadad</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/冒泡算法/">-冒泡算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/基数排序/">-基数排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/堆排序/">-堆排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/希尔排序/">-希尔排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/归并排序/">-归并排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快速排序/">-快速排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/直接插入排序/">-直接插入排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/访问控制符的作用/">-访问控制符的作用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/选择排序/">-选择排序</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/dadadad/">-dadadad</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grgsg/">-grgsg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/冒泡算法/">-冒泡算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/基数排序/">-基数排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/堆排序/">-堆排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/希尔排序/">-希尔排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/归并排序/">-归并排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快速排序/">-快速排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/直接插入排序/">-直接插入排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/访问控制符的作用/">-访问控制符的作用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/选择排序/">-选择排序</a></li></ul>
     </div>
   </div>
 
@@ -177,7 +177,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/dadadad/" style="font-size: 10px;">-dadadad</a> <a href="/tags/冒泡算法/" style="font-size: 10px;">-冒泡算法</a> <a href="/tags/基数排序/" style="font-size: 10px;">-基数排序</a> <a href="/tags/堆排序/" style="font-size: 10px;">-堆排序</a> <a href="/tags/希尔排序/" style="font-size: 10px;">-希尔排序</a> <a href="/tags/归并排序/" style="font-size: 10px;">-归并排序</a> <a href="/tags/快速排序/" style="font-size: 10px;">-快速排序</a> <a href="/tags/直接插入排序/" style="font-size: 10px;">-直接插入排序</a> <a href="/tags/访问控制符的作用/" style="font-size: 10px;">-访问控制符的作用</a> <a href="/tags/选择排序/" style="font-size: 10px;">-选择排序</a>
+      <a href="/tags/dadadad/" style="font-size: 10px;">-dadadad</a> <a href="/tags/grgsg/" style="font-size: 10px;">-grgsg</a> <a href="/tags/冒泡算法/" style="font-size: 10px;">-冒泡算法</a> <a href="/tags/基数排序/" style="font-size: 10px;">-基数排序</a> <a href="/tags/堆排序/" style="font-size: 10px;">-堆排序</a> <a href="/tags/希尔排序/" style="font-size: 10px;">-希尔排序</a> <a href="/tags/归并排序/" style="font-size: 10px;">-归并排序</a> <a href="/tags/快速排序/" style="font-size: 10px;">-快速排序</a> <a href="/tags/直接插入排序/" style="font-size: 10px;">-直接插入排序</a> <a href="/tags/访问控制符的作用/" style="font-size: 10px;">-访问控制符的作用</a> <a href="/tags/选择排序/" style="font-size: 10px;">-选择排序</a>
     </div>
   </div>
 
@@ -199,6 +199,10 @@
       <ul>
         
           <li>
+            <a href="/2019/09/11/new/">new</a>
+          </li>
+        
+          <li>
             <a href="/2019/09/11/dadada/">dadada</a>
           </li>
         
@@ -212,10 +216,6 @@
         
           <li>
             <a href="/2019/09/03/排序算法之希尔排序/">排序算法之希尔排序</a>
-          </li>
-        
-          <li>
-            <a href="/2019/09/03/排序算法之直接插入排序/">排序算法之直接插入排序</a>
           </li>
         
       </ul>
